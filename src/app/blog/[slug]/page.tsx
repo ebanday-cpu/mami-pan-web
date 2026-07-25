@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { MDXRemote } from "next-mdx-remote/rsc";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getAllPosts, getPostBySlug, getPostContent } from "@/lib/blog";
 
 export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
@@ -38,6 +37,10 @@ export default async function PostPage({
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const mod = await getPostContent(slug);
+  if (!mod) notFound();
+  const Content = mod.default;
+
   return (
     <article className="mx-auto max-w-3xl px-6 py-16 sm:px-10 sm:py-24">
       <p className="text-xs font-semibold uppercase tracking-wide text-muted">
@@ -63,7 +66,7 @@ export default async function PostPage({
       </div>
 
       <div className="prose prose-neutral mt-10 max-w-none prose-headings:font-serif prose-headings:italic prose-headings:text-ink prose-p:text-muted-2 prose-li:text-muted-2">
-        <MDXRemote source={post.content} />
+        <Content />
       </div>
     </article>
   );
