@@ -97,10 +97,20 @@ mami-pan-web/
       `docs/00-datos-negocio-actual.md` (35 comunas, misma fuente que usa el
       bot). Si cambia, se actualiza primero en `mami-pan-bot/` y se propaga
       acá.
-- [ ] Dominio y hosting del sitio (ver `docs/02-arquitectura-web.md`). Una
-      vez elegido, configurar `NEXT_PUBLIC_SITE_URL` (usado en
-      `src/lib/site.ts` para metadata, Open Graph y `sitemap.xml`) — hoy
-      cae de respaldo a `http://localhost:3000`.
+- [x] Dominio y hosting — sitio desplegado en **Cloudflare Workers**
+      (gratis, permite uso comercial y subdominios ilimitados con la misma
+      cuenta para otros proyectos futuros — se prefirió sobre Vercel, cuyo
+      plan gratis prohíbe uso comercial). Deploy vía `npm run deploy`
+      (wrangler + `@opennextjs/cloudflare`, ver `wrangler.jsonc`).
+      Dominio real: **https://mamipan.cl** (nameservers migrados de
+      DigitalOcean a Cloudflare; `bot.mamipan.cl`, del otro proyecto,
+      quedó intacto). URL de respaldo:
+      `https://mami-pan-web.ebanday.workers.dev`. `NEXT_PUBLIC_SITE_URL`
+      ya está fijo en `.env.production` (commiteado, no es secreto) —
+      no hace falta tocarlo salvo que cambie el dominio.
+      El blog se migró de `next-mdx-remote` (runtime eval, incompatible
+      con Workers) a `@next/mdx` (compila en build-time) — agregar un post
+      nuevo sigue siendo solo soltar un `.mdx` en `src/content/blog/`.
 - [x] Fotografía de producto — las 3 fotos (`public/productos/*.jpg`) fueron
       mejoradas con IA (Higgsfield, modelo `marketing_studio_image`) a partir
       de las fotos reales originales, manteniendo el pan fiel al real y
