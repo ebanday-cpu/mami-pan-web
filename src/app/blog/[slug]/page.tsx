@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug, getPostContent } from "@/lib/blog";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL } from "@/lib/site";
+import { MARCA } from "@/lib/negocio";
 
 export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
@@ -18,6 +21,7 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical: `${SITE_URL}/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.excerpt,
@@ -41,8 +45,47 @@ export default async function PostPage({
   if (!mod) notFound();
   const Content = mod.default;
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: `${SITE_URL}${post.imagen}`,
+    datePublished: post.date,
+    url: `${SITE_URL}/blog/${post.slug}`,
+    author: { "@type": "Organization", name: MARCA.nombre },
+    publisher: {
+      "@type": "Organization",
+      name: MARCA.nombre,
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/marca/logo.png` },
+    },
+    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: `${SITE_URL}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `${SITE_URL}/blog/${post.slug}`,
+      },
+    ],
+  };
+
   return (
     <article className="mx-auto max-w-3xl px-6 py-16 sm:px-10 sm:py-24">
+      <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <p className="text-xs font-semibold uppercase tracking-wide text-muted">
         {new Date(post.date).toLocaleDateString("es-CL", {
           day: "numeric",

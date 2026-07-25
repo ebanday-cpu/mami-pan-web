@@ -32,6 +32,12 @@ export default function Footer() {
           <Link href="/blog" className="text-ink hover:text-terracotta">
             Blog
           </Link>
+          <Link
+            href="/preguntas-frecuentes"
+            className="text-ink hover:text-terracotta"
+          >
+            Preguntas frecuentes
+          </Link>
           <a
             href={MARCA.instagramUrl}
             target="_blank"

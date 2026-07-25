@@ -3,12 +3,25 @@ import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import { ENVIO, PRODUCTOS } from "@/lib/negocio";
 import { getAllPosts } from "@/lib/blog";
+import { FAQ } from "@/lib/faq";
+import JsonLd from "@/components/JsonLd";
 
 export default function Home() {
   const posts = getAllPosts().slice(0, 3);
+  const faqDestacadas = FAQ.slice(0, 4);
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqDestacadas.map((item) => ({
+      "@type": "Question",
+      name: item.pregunta,
+      acceptedAnswer: { "@type": "Answer", text: item.respuesta },
+    })),
+  };
 
   return (
     <>
+      <JsonLd data={faqSchema} />
       {/* HERO */}
       <section className="mx-auto grid max-w-6xl gap-10 px-6 py-16 sm:px-10 sm:py-24 md:grid-cols-2 md:items-center md:py-32">
         <div>
@@ -133,6 +146,33 @@ export default function Home() {
             </Link>
           ))}
         </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="mx-auto max-w-3xl px-6 py-20 sm:px-10">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="font-serif text-3xl italic text-ink sm:text-4xl">
+            Preguntas frecuentes
+          </h2>
+          <Link
+            href="/preguntas-frecuentes"
+            className="text-sm font-semibold text-terracotta hover:text-terracotta-dark"
+          >
+            Ver todas →
+          </Link>
+        </div>
+        <dl className="mt-10 space-y-8">
+          {faqDestacadas.map((item) => (
+            <div key={item.pregunta}>
+              <dt className="font-serif text-lg italic text-ink">
+                {item.pregunta}
+              </dt>
+              <dd className="mt-2 text-sm leading-relaxed text-muted-2">
+                {item.respuesta}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       {/* CIERRE */}

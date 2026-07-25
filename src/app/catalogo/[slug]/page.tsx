@@ -11,6 +11,8 @@ import {
   getProductoPorSlug,
 } from "@/lib/negocio";
 import AgregarAlCarrito from "@/components/AgregarAlCarrito";
+import JsonLd from "@/components/JsonLd";
+import { SITE_URL } from "@/lib/site";
 
 export function generateStaticParams() {
   return PRODUCTOS.map((producto) => ({ slug: producto.slug }));
@@ -27,6 +29,7 @@ export async function generateMetadata({
   return {
     title: producto.nombre,
     description: producto.descripcion,
+    alternates: { canonical: `${SITE_URL}/catalogo/${producto.slug}` },
     openGraph: {
       title: producto.nombre,
       description: producto.descripcion,
@@ -44,8 +47,48 @@ export default async function ProductoPage({
   const producto = getProductoPorSlug(slug);
   if (!producto) notFound();
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: producto.nombre,
+    description: producto.descripcion,
+    image: `${SITE_URL}${producto.imagen}`,
+    url: `${SITE_URL}/catalogo/${producto.slug}`,
+    brand: { "@type": "Brand", name: "Mami Pan" },
+    offers: {
+      "@type": "Offer",
+      url: `${SITE_URL}/catalogo/${producto.slug}`,
+      priceCurrency: "CLP",
+      price: producto.precio,
+      availability: "https://schema.org/InStock",
+      areaServed: ENVIO.region,
+    },
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Nuestro pan",
+        item: `${SITE_URL}/catalogo`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: producto.nombre,
+        item: `${SITE_URL}/catalogo/${producto.slug}`,
+      },
+    ],
+  };
+
   return (
     <div className="mx-auto grid max-w-5xl gap-10 px-6 py-16 sm:px-10 sm:py-24 md:grid-cols-2 md:items-start">
+      <JsonLd data={productSchema} />
+      <JsonLd data={breadcrumbSchema} />
       <div className="relative aspect-square overflow-hidden rounded-3xl">
         <Image
           src={producto.imagen}

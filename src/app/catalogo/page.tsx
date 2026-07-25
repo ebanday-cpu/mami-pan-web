@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import ProductCard from "@/components/ProductCard";
 import { ENVIO, PRODUCTOS, TEXTO_GLUTEN } from "@/lib/negocio";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Nuestro pan",
   description:
     "Pan blanco, integral y con semillas, de masa madre, hecho con fermentación lenta.",
+  alternates: { canonical: `${SITE_URL}/catalogo` },
 };
 
 export default function CatalogoPage() {

@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
+import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Blog",
   description: "Historias sobre masa madre, fermentación y pan artesanal.",
+  alternates: { canonical: `${SITE_URL}/blog` },
 };
 
 export default function BlogPage() {

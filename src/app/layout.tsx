@@ -4,7 +4,9 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/CartProvider";
+import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
+import { ENVIO, MARCA, COMUNAS_COBERTURA } from "@/lib/negocio";
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
@@ -30,6 +32,7 @@ export const metadata: Metadata = {
     template: "%s — Mami Pan",
   },
   description: DESCRIPCION,
+  alternates: { canonical: SITE_URL },
   openGraph: {
     title: TITULO,
     description: DESCRIPCION,
@@ -46,6 +49,26 @@ export const metadata: Metadata = {
   },
 };
 
+const bakerySchema = {
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  name: MARCA.nombre,
+  url: SITE_URL,
+  logo: `${SITE_URL}/marca/logo.png`,
+  image: `${SITE_URL}${IMAGEN_SOCIAL}`,
+  description: DESCRIPCION,
+  priceRange: "$",
+  areaServed: {
+    "@type": "AdministrativeArea",
+    name: ENVIO.region,
+    containsPlace: COMUNAS_COBERTURA.map((comuna) => ({
+      "@type": "AdministrativeArea",
+      name: comuna,
+    })),
+  },
+  sameAs: [MARCA.instagramUrl],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -57,6 +80,7 @@ export default function RootLayout({
       className={`${instrumentSerif.variable} ${manrope.variable} h-full`}
     >
       <body className="flex min-h-full flex-col font-sans antialiased">
+        <JsonLd data={bakerySchema} />
         <CartProvider>
           <Header />
           <main className="flex-1">{children}</main>
