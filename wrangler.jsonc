@@ -5,7 +5,8 @@
   "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    "html_handling": "none"
   },
   "routes": [
     { "pattern": "mamipan.cl", "custom_domain": true }
