@@ -11,7 +11,7 @@ import {
   getProductoPorSlug,
 } from "@/lib/negocio";
 import AgregarAlCarrito from "@/components/AgregarAlCarrito";
-import ProductCardConCarrito from "@/components/ProductCardConCarrito";
+import ProductCard from "@/components/ProductCard";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 
@@ -146,7 +146,7 @@ export default async function ProductoPage({
           </h2>
           <div className="mt-8 grid gap-8 sm:grid-cols-2">
             {otrosProductos.map((otro) => (
-              <ProductCardConCarrito key={otro.slug} producto={otro} />
+              <ProductCard key={otro.slug} producto={otro} />
             ))}
           </div>
         </div>
