@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  --color-cream: #faf8f4;
+  --color-cream-2: #efe9dd;
+  --color-line: #e5e0d5;
+  --color-tan: #ded3be;
+  --color-ink: #2b2b2b;
+  --color-brown: #4a4034;
+  --color-terracotta: #c97b4a;
+  --color-terracotta-dark: #b3663a;
+  --color-muted: #8c8478;
+  --color-muted-2: #5c5646;
+  --color-sage: #7a8b6f;
+}
+
+/* Sitio con look editorial cálido, único (no se adapta a modo oscuro del
+   sistema) — igual que las panaderías artesanales de referencia. */
+@theme inline {
+  --color-cream: var(--color-cream);
+  --color-cream-2: var(--color-cream-2);
+  --color-line: var(--color-line);
+  --color-tan: var(--color-tan);
+  --color-ink: var(--color-ink);
+  --color-brown: var(--color-brown);
+  --color-terracotta: var(--color-terracotta);
+  --color-terracotta-dark: var(--color-terracotta-dark);
+  --color-muted: var(--color-muted);
+  --color-muted-2: var(--color-muted-2);
+  --color-sage: var(--color-sage);
+
+  --font-serif: var(--font-instrument-serif);
+  --font-sans: var(--font-manrope);
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
