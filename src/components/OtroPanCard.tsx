@@ -3,13 +3,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { formatearPrecio, type Producto } from "@/lib/negocio";
-import { useCart } from "@/components/CartProvider";
+import { formatearPrecio, whatsappUrlCompra, type Producto } from "@/lib/negocio";
 
 export default function OtroPanCard({ producto }: { producto: Producto }) {
   const [cantidad, setCantidad] = useState(1);
-  const [agregado, setAgregado] = useState(false);
-  const { agregar } = useCart();
 
   return (
     <div className="flex gap-4 rounded-2xl border border-line bg-cream p-4">
@@ -41,10 +38,7 @@ export default function OtroPanCard({ producto }: { producto: Producto }) {
             <button
               type="button"
               aria-label="Restar cantidad"
-              onClick={() => {
-                setCantidad((c) => Math.max(1, c - 1));
-                setAgregado(false);
-              }}
+              onClick={() => setCantidad((c) => Math.max(1, c - 1))}
               className="flex h-8 w-8 items-center justify-center text-base text-ink hover:text-terracotta"
             >
               −
@@ -55,36 +49,22 @@ export default function OtroPanCard({ producto }: { producto: Producto }) {
             <button
               type="button"
               aria-label="Sumar cantidad"
-              onClick={() => {
-                setCantidad((c) => Math.min(20, c + 1));
-                setAgregado(false);
-              }}
+              onClick={() => setCantidad((c) => Math.min(20, c + 1))}
               className="flex h-8 w-8 items-center justify-center text-base text-ink hover:text-terracotta"
             >
               +
             </button>
           </div>
 
-          <button
-            type="button"
-            onClick={() => {
-              agregar(producto.slug, cantidad);
-              setAgregado(true);
-            }}
+          <a
+            href={whatsappUrlCompra(producto, cantidad)}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full bg-terracotta px-4 py-2 text-xs font-semibold text-cream transition-colors hover:bg-terracotta-dark"
           >
-            Agregar al carrito
-          </button>
+            Comprar por WhatsApp
+          </a>
         </div>
-
-        {agregado && (
-          <p className="mt-2 text-sm text-sage">
-            Agregado · {cantidad} {cantidad === 1 ? "unidad" : "unidades"} ·{" "}
-            <Link href="/carrito" className="font-semibold underline">
-              ver carrito
-            </Link>
-          </p>
-        )}
       </div>
     </div>
   );

@@ -119,3 +119,27 @@ export function formatearPrecio(valor: number): string {
     maximumFractionDigits: 0,
   });
 }
+
+// Pausa temporal mientras no hay pasarela de pago (ver
+// docs/04-pasarela-pago-pendiente.md): la compra se cierra por WhatsApp
+// con Pancracio (el bot con guion de ventas), no con el carrito/checkout
+// propios. Este número y las funciones de abajo viven solo en la rama
+// `whatsapp-temporal` — `main` conserva el checkout real intacto
+// (tag `checkout-completo-pre-whatsapp`) para volver a él apenas la
+// pasarela esté operativa.
+export const WHATSAPP_PANCRACIO = "56965500052";
+
+export function mensajeWhatsappCompra(producto: Producto, cantidad: number): string {
+  const total = formatearPrecio(producto.precio * cantidad);
+  return `Hola! Quiero comprar ${cantidad} ${cantidad === 1 ? "unidad" : "unidades"} de ${producto.nombre} (${total}). ¿Me ayudas a cerrar el pedido?`;
+}
+
+export function whatsappUrlCompra(producto: Producto, cantidad: number): string {
+  return `https://wa.me/${WHATSAPP_PANCRACIO}?text=${encodeURIComponent(
+    mensajeWhatsappCompra(producto, cantidad)
+  )}`;
+}
+
+export const WHATSAPP_URL_GENERAL = `https://wa.me/${WHATSAPP_PANCRACIO}?text=${encodeURIComponent(
+  "Hola! Quiero hacer un pedido de pan."
+)}`;

@@ -13,12 +13,48 @@ Un sitio web para Mami Pan (venta de pan de masa madre) con:
 - Venta restringida a Región Metropolitana (mismo despacho por empresa privada
   externa que ya usa el bot).
 
-## El sitio NO usa WhatsApp para nada relacionado a la compra
+## El sitio NO usa WhatsApp para nada relacionado a la compra (regla base — ver pausa temporal abajo)
 ⚠️ Se intentó en una iteración anterior usar un link de WhatsApp
 precargado como reemplazo temporal del checkout — el usuario pidió
 eliminarlo por completo: el sitio es ecommerce real, con carrito y
 checkout propios, no un puente a una conversación de WhatsApp. No
 reintroducir botones de "Pedir/Comprar por WhatsApp" en ninguna página.
+
+Esta es la regla de fondo / el estado al que se quiere volver. **Ahora
+mismo está pausada a propósito** — ver la sección siguiente.
+
+## ⏸️ PAUSA TEMPORAL ACTIVA (desde 2026-07-26): compra por WhatsApp mientras no hay pasarela
+Mientras `docs/04-pasarela-pago-pendiente.md` siga sin resolverse, el
+usuario pidió explícitamente **reintroducir** botones de "Comprar por
+WhatsApp" (excepción consciente a la regla de arriba, no un error) para
+no perder ventas: el sitio muestra fotos + beneficios + precio de cada
+pan y dirige la compra a WhatsApp en vez del carrito/checkout.
+
+- **Cómo está implementado:** rama de git `whatsapp-temporal` (separada
+  de `main`). `main` conserva el checkout real intacto — está marcado
+  con el tag **`checkout-completo-pre-whatsapp`** (pusheado a origin)
+  apuntando al commit `feb5c6f`, el último estado 100% ecommerce antes
+  de este cambio.
+- **Número usado:** el de **Pancracio** (el bot, con guion de ventas
+  armado — ver más abajo), no el de Paula. Vive en
+  `src/lib/negocio.ts` como `WHATSAPP_PANCRACIO`.
+- **Qué se quitó/cambió en esa rama:** botón "Comprar por WhatsApp" en
+  el Header (reemplaza el ícono de carrito), en la ficha de producto
+  (reemplaza `AgregarAlCarrito`, ahora `ComprarPorWhatsapp`) y en "Los
+  otros panes" (`OtroPanCard`). `/carrito` y `/checkout` quedan sin
+  enlazar en la navegación (siguen existiendo en el código, ya
+  bloqueadas en `robots.ts`).
+- **Cómo volver al checkout real cuando la pasarela esté lista:**
+  desplegar de nuevo desde `main` (o el tag
+  `checkout-completo-pre-whatsapp`) en vez de `whatsapp-temporal`. No
+  hace falta "deshacer" nada a mano — es simplemente dejar de desplegar
+  la rama temporal.
+- ⚠️ **Para una sesión futura:** si ves botones de WhatsApp en el
+  código y esta sección todavía dice "PAUSA TEMPORAL ACTIVA", **no los
+  quites por tu cuenta** pensando que violan la regla de arriba — es
+  intencional. Confirma con el usuario si la pasarela ya está lista
+  antes de tocar esto. Si ya se resolvió, borra esta sección entera y
+  el tag ya cumplió su propósito.
 
 ## Los dos números de WhatsApp del ecosistema (contexto, no usado por el sitio)
 - **Paula** (humana) atiende un número y toma pedidos reales manualmente.

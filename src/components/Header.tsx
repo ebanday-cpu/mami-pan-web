@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MARCA } from "@/lib/negocio";
+import { MARCA, WHATSAPP_URL_GENERAL } from "@/lib/negocio";
 import MobileMenu from "@/components/MobileMenu";
-import CartIcon from "@/components/CartIcon";
 
 const NAV_LINKS = [
   { href: "/", label: "Inicio" },
@@ -47,7 +46,14 @@ export default function Header() {
           ))}
         </nav>
 
-        <CartIcon />
+        <a
+          href={WHATSAPP_URL_GENERAL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-full bg-terracotta px-4 py-2 text-xs font-semibold text-cream transition-colors hover:bg-terracotta-dark sm:text-sm"
+        >
+          Comprar por WhatsApp
+        </a>
       </div>
     </header>
   );
