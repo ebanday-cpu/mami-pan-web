@@ -18,6 +18,10 @@
    del sitio (ver `04-pasarela-pago-pendiente.md`) — **sin relación con el
    bot**, funciona como el checkout de cualquier ecommerce.
 5. **Blog** — ver `05-blog.md`.
+6. **Páginas legales** (`/politicas`) — términos y condiciones, privacidad,
+   envíos y cambios/devoluciones. Usan la identidad legal real (Mami Pan
+   SPA, RUT en `src/lib/negocio.ts` → `EMPRESA`) y están enlazadas desde el
+   footer y el sitemap.
 
 ⚠️ El sitio **no tiene ningún enlace a WhatsApp** — es ecommerce real, con
 carrito y checkout propios (ver `CLAUDE.md`, "El sitio NO usa WhatsApp
