@@ -57,18 +57,21 @@ checkout — igual que hace el bot en su flujo de conversación.
 - **Negocio:** Mami Pan.
 - Instagram: https://www.instagram.com/mamipan_cl (@mamipan_cl).
 
-### Los dos números de WhatsApp del ecosistema (contexto de negocio — el sitio no usa ninguno)
-⚠️ El sitio **no enlaza a WhatsApp en ningún punto de la compra** — es
-ecommerce real, con carrito y checkout propios (decisión del usuario,
-revirtiendo un atajo temporal de una iteración anterior que sí usaba un
-link de WhatsApp). Este apartado queda solo como contexto del negocio, por
-si hace falta en el futuro:
+### Los dos números de WhatsApp del ecosistema
 - **Paula** (humana) atiende el WhatsApp de **atención/pedidos**: +56 9
   5340 9802. Ella es quien toma los pedidos reales manualmente hoy.
-- **Pancracio** (el bot) corre en un **número distinto** al de Paula. Su
-  rol es agendar y su discurso está armado para **llevar a la venta**
-  (guion de ventas, no de soporte/dudas) — sus respuestas después se
-  concilian con los pedidos que Paula toma manualmente.
+- **Pancracio** (el bot): **+56 9 6550 0052**. Su rol es agendar y su
+  discurso está armado para **llevar a la venta** (guion de ventas, no
+  de soporte/dudas) — sus respuestas después se concilian con los
+  pedidos que Paula toma manualmente.
+
+⚠️ **Estado 2026-07-26, temporal:** mientras no haya pasarela de pago
+(ver "Medios de pago" abajo), el sitio **sí** enlaza a WhatsApp — botón
+"Pedir por WhatsApp" en header/ficha de producto, apuntando al número
+de **Pancracio**. Es una excepción consciente y reversible (rama de git
+`whatsapp-temporal`, detalle completo en `CLAUDE.md`), no la regla de
+fondo: en cuanto la pasarela esté lista, el sitio vuelve a su checkout
+propio (carrito + despacho, sin WhatsApp de por medio).
 
 ## Medios de pago
 El bot/Paula manejan pedidos con transferencia bancaria manual y

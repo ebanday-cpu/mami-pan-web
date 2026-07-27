@@ -38,12 +38,21 @@ pan y dirige la compra a WhatsApp en vez del carrito/checkout.
 - **Número usado:** el de **Pancracio** (el bot, con guion de ventas
   armado — ver más abajo), no el de Paula. Vive en
   `src/lib/negocio.ts` como `WHATSAPP_PANCRACIO`.
-- **Qué se quitó/cambió en esa rama:** botón "Comprar por WhatsApp" en
-  el Header (reemplaza el ícono de carrito), en la ficha de producto
-  (reemplaza `AgregarAlCarrito`, ahora `ComprarPorWhatsapp`) y en "Los
-  otros panes" (`OtroPanCard`). `/carrito` y `/checkout` quedan sin
-  enlazar en la navegación (siguen existiendo en el código, ya
-  bloqueadas en `robots.ts`).
+- **Qué se quitó/cambió en esa rama (versión final, tras dos
+  iteraciones):** botón simple **"Pedir por WhatsApp"**, sin selector
+  de cantidad — Pancracio coordina cantidad/detalles en la
+  conversación. Vive en el Header (mensaje genérico,
+  `WHATSAPP_URL_GENERAL`), en la ficha de producto
+  (`src/components/PedirPorWhatsapp.tsx`, mensaje con el nombre y
+  precio de ese pan) y en "Los otros panes" (`OtroPanCard`, mismo
+  patrón). El carrito real (`CartProvider`, `useCart`) ya **no se usa
+  en ningún componente visible** — se probó primero una versión con
+  selector de cantidad + carrito acumulando varios panes para un solo
+  mensaje combinado, pero se simplificó a este botón único por pan.
+  `/carrito` y `/checkout` quedan huérfanas (sin enlazar en la
+  navegación, bloqueadas en `robots.ts`) pero funcionales — como nada
+  llama a `agregar()`, siempre muestran su estado de "vacío", no se
+  rompen si alguien entra por URL directa.
 - **Cómo volver al checkout real cuando la pasarela esté lista:**
   desplegar de nuevo desde `main` (o el tag
   `checkout-completo-pre-whatsapp`) en vez de `whatsapp-temporal`. No
