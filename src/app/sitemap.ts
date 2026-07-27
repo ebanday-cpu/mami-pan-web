@@ -13,6 +13,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    { url: `${SITE_URL}/politicas`, changeFrequency: "yearly", priority: 0.3 },
+    {
+      url: `${SITE_URL}/politicas/terminos-y-condiciones`,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${SITE_URL}/politicas/privacidad`,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${SITE_URL}/politicas/envios`,
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
+    {
+      url: `${SITE_URL}/politicas/cambios-y-devoluciones`,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 
   const productos: MetadataRoute.Sitemap = PRODUCTOS.map((producto) => ({

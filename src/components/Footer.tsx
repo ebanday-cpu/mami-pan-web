@@ -48,6 +48,33 @@ export default function Footer() {
           </a>
         </div>
 
+        <div className="flex flex-col gap-2 text-sm">
+          <Link
+            href="/politicas/terminos-y-condiciones"
+            className="text-muted-2 hover:text-terracotta"
+          >
+            Términos y condiciones
+          </Link>
+          <Link
+            href="/politicas/privacidad"
+            className="text-muted-2 hover:text-terracotta"
+          >
+            Privacidad
+          </Link>
+          <Link
+            href="/politicas/envios"
+            className="text-muted-2 hover:text-terracotta"
+          >
+            Envíos
+          </Link>
+          <Link
+            href="/politicas/cambios-y-devoluciones"
+            className="text-muted-2 hover:text-terracotta"
+          >
+            Cambios y devoluciones
+          </Link>
+        </div>
+
         <p className="text-xs text-muted">
           © {new Date().getFullYear()} {MARCA.nombre}. Todos los derechos
           reservados.

@@ -55,7 +55,22 @@ checkout — igual que hace el bot en su flujo de conversación.
 
 ## Marca / canales
 - **Negocio:** Mami Pan.
+- **Razón social:** Mami Pan SPA — **RUT:** 78.292.856-2.
 - Instagram: https://www.instagram.com/mamipan_cl (@mamipan_cl).
+
+## Identidad legal y contacto para políticas (privacidad, términos, envíos, cambios)
+- **Responsable/vendedor:** Mami Pan SPA, RUT 78.292.856-2.
+- **Canal de contacto para consultas de privacidad, reclamos o cambios/
+  devoluciones:** WhatsApp de **Paula** (atención humana), +56 9 5340 9802
+  — no el bot Pancracio.
+- **Política de cambios y devoluciones (2026-07-27):** al ser un producto
+  perecible horneado para el despacho, no se aceptan cambios por "no me
+  gustó". Sí se resuelve (reposición o reembolso) si el pedido llega
+  dañado, incompleto o distinto a lo solicitado, avisando por WhatsApp a
+  Paula dentro de un plazo corto tras la entrega (mismo día/24 horas).
+- El sitio no usa cookies de analítica ni de terceros por ahora (no hay
+  Google Analytics ni similar instalado) — si se agrega algo en el futuro,
+  actualizar este dato y la política de privacidad.
 
 ### Los dos números de WhatsApp del ecosistema
 - **Paula** (humana) atiende el WhatsApp de **atención/pedidos**: +56 9

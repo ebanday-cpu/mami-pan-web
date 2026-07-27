@@ -112,6 +112,20 @@ export const MARCA = {
   instagramHandle: "@mamipan_cl",
 } as const;
 
+// Identidad legal de la empresa (para políticas de privacidad, términos,
+// etc.) y canal de contacto para consultas/reclamos — WhatsApp de Paula
+// (atención humana), no el bot Pancracio. Ver docs/00-datos-negocio-actual.md.
+export const EMPRESA = {
+  razonSocial: "Mami Pan SPA",
+  rut: "78.292.856-2",
+} as const;
+
+export const WHATSAPP_PAULA = "56953409802";
+
+export function whatsappUrlContacto(mensaje: string): string {
+  return `https://wa.me/${WHATSAPP_PAULA}?text=${encodeURIComponent(mensaje)}`;
+}
+
 export function formatearPrecio(valor: number): string {
   return valor.toLocaleString("es-CL", {
     style: "currency",

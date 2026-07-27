@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { CartProvider } from "@/components/CartProvider";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
-import { ENVIO, MARCA, COMUNAS_COBERTURA } from "@/lib/negocio";
+import { ENVIO, MARCA, COMUNAS_COBERTURA, EMPRESA, WHATSAPP_PAULA } from "@/lib/negocio";
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
@@ -22,7 +22,7 @@ const manrope = Manrope({
 
 const TITULO = "Mami Pan — Pan de masa madre artesanal";
 const DESCRIPCION =
-  "Pan de masa madre hecho con tiempo, sin atajos. Pan blanco, integral y con semillas, despacho en la Región Metropolitana.";
+  "Pan de masa madre artesanal en Santiago, con fermentación lenta de casi 48 horas y sin conservantes. Pan blanco, integral y con semillas, con despacho a domicilio en toda la Región Metropolitana.";
 const IMAGEN_SOCIAL = "/productos/pan-blanco.jpg";
 
 export const metadata: Metadata = {
@@ -53,6 +53,8 @@ const bakerySchema = {
   "@context": "https://schema.org",
   "@type": "Bakery",
   name: MARCA.nombre,
+  legalName: EMPRESA.razonSocial,
+  taxID: EMPRESA.rut,
   url: SITE_URL,
   logo: `${SITE_URL}/marca/logo.png`,
   image: `${SITE_URL}${IMAGEN_SOCIAL}`,
@@ -66,7 +68,21 @@ const bakerySchema = {
       name: comuna,
     })),
   },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    telephone: `+${WHATSAPP_PAULA}`,
+    areaServed: "CL",
+    availableLanguage: "Spanish",
+  },
   sameAs: [MARCA.instagramUrl],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: MARCA.nombre,
+  url: SITE_URL,
 };
 
 export default function RootLayout({
@@ -81,6 +97,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col font-sans antialiased">
         <JsonLd data={bakerySchema} />
+        <JsonLd data={websiteSchema} />
         <CartProvider>
           <Header />
           <main className="flex-1">{children}</main>
