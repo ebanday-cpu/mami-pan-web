@@ -35,9 +35,9 @@ export const PRODUCTOS: Producto[] = [
     nombre: "Pan con Semillas",
     precio: 3400,
     imagen: "/productos/pan-semillas.jpg",
-    resumen: "Mezcla de semillas, crocante en cada corte.",
+    resumen: "Mezcla de chía, linaza y calabaza, crocante en cada corte.",
     descripcion:
-      "Nuestra masa madre con una mezcla de semillas por dentro y por fuera. Textura crocante y un extra de sabor en cada rebanada.",
+      "Nuestra masa madre con una mezcla de chía, linaza y semillas de calabaza por dentro y por fuera. Textura crocante y un extra de sabor y nutrientes en cada rebanada.",
   },
 ];
 

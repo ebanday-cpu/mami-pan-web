@@ -19,6 +19,8 @@ actualizar también esta copia.
 | Pan integral | $3.200 |
 | Pan con semillas | $3.400 |
 
+**Pan con semillas:** mezcla de chía, linaza y semillas de calabaza, por dentro y por fuera de la masa.
+
 **Beneficios** (usar tal cual cuando se muestren en el sitio):
 - Ideal para personas con problemas digestivos.
 - Apto para personas con diabetes (igual sugerir consultar con su médico, no
