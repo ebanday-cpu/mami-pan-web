@@ -52,7 +52,7 @@ export default function Header() {
           rel="noopener noreferrer"
           className="rounded-full bg-terracotta px-4 py-2 text-xs font-semibold text-cream transition-colors hover:bg-terracotta-dark sm:text-sm"
         >
-          Comprar por WhatsApp
+          Pedir por WhatsApp
         </a>
       </div>
     </header>

@@ -1,13 +1,8 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { formatearPrecio, whatsappUrlCompra, type Producto } from "@/lib/negocio";
+import { formatearPrecio, whatsappUrlProducto, type Producto } from "@/lib/negocio";
 
 export default function OtroPanCard({ producto }: { producto: Producto }) {
-  const [cantidad, setCantidad] = useState(1);
-
   return (
     <div className="flex gap-4 rounded-2xl border border-line bg-cream p-4">
       <Link
@@ -33,38 +28,14 @@ export default function OtroPanCard({ producto }: { producto: Producto }) {
           {formatearPrecio(producto.precio)}
         </p>
 
-        <div className="mt-2 flex flex-wrap items-center gap-3">
-          <div className="flex items-center rounded-full border border-tan">
-            <button
-              type="button"
-              aria-label="Restar cantidad"
-              onClick={() => setCantidad((c) => Math.max(1, c - 1))}
-              className="flex h-8 w-8 items-center justify-center text-base text-ink hover:text-terracotta"
-            >
-              −
-            </button>
-            <span className="w-5 text-center text-sm font-semibold text-ink">
-              {cantidad}
-            </span>
-            <button
-              type="button"
-              aria-label="Sumar cantidad"
-              onClick={() => setCantidad((c) => Math.min(20, c + 1))}
-              className="flex h-8 w-8 items-center justify-center text-base text-ink hover:text-terracotta"
-            >
-              +
-            </button>
-          </div>
-
-          <a
-            href={whatsappUrlCompra(producto, cantidad)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-terracotta px-4 py-2 text-xs font-semibold text-cream transition-colors hover:bg-terracotta-dark"
-          >
-            Comprar por WhatsApp
-          </a>
-        </div>
+        <a
+          href={whatsappUrlProducto(producto)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-2 inline-block w-fit rounded-full bg-terracotta px-4 py-2 text-xs font-semibold text-cream transition-colors hover:bg-terracotta-dark"
+        >
+          Pedir por WhatsApp
+        </a>
       </div>
     </div>
   );

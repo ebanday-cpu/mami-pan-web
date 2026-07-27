@@ -10,7 +10,7 @@ import {
   formatearPrecio,
   getProductoPorSlug,
 } from "@/lib/negocio";
-import ComprarPorWhatsapp from "@/components/ComprarPorWhatsapp";
+import PedirPorWhatsapp from "@/components/PedirPorWhatsapp";
 import OtroPanCard from "@/components/OtroPanCard";
 import JsonLd from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
@@ -129,12 +129,15 @@ export default async function ProductoPage({
           </p>
 
           <div className="mt-8 border-t border-line pt-8">
-            <ComprarPorWhatsapp producto={producto} />
+            <PedirPorWhatsapp producto={producto} />
           </div>
 
-          <p className="mt-6 text-xs text-muted">
-            Envío gratis desde {ENVIO.gratisDesdeUnidades} panes · Despacho
-            en {ENVIO.region}, {ENVIO.dias.toLowerCase()}, {ENVIO.ventana}.
+          <p className="mt-6 text-base font-semibold text-sage">
+            Envío gratis desde {ENVIO.gratisDesdeUnidades} panes
+          </p>
+          <p className="mt-1 text-xs text-muted">
+            Despacho en {ENVIO.region}, {ENVIO.dias.toLowerCase()},{" "}
+            {ENVIO.ventana}.
           </p>
         </div>
       </div>

@@ -102,7 +102,7 @@ export default function Home() {
               , entre {ENVIO.ventana}.
             </p>
           </div>
-          <div className="text-sm font-semibold text-sage">
+          <div className="text-lg font-semibold text-sage">
             Envío gratis desde {ENVIO.gratisDesdeUnidades} panes
           </div>
         </div>

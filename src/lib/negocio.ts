@@ -129,15 +129,9 @@ export function formatearPrecio(valor: number): string {
 // pasarela esté operativa.
 export const WHATSAPP_PANCRACIO = "56965500052";
 
-export function mensajeWhatsappCompra(producto: Producto, cantidad: number): string {
-  const total = formatearPrecio(producto.precio * cantidad);
-  return `Hola! Quiero comprar ${cantidad} ${cantidad === 1 ? "unidad" : "unidades"} de ${producto.nombre} (${total}). ¿Me ayudas a cerrar el pedido?`;
-}
-
-export function whatsappUrlCompra(producto: Producto, cantidad: number): string {
-  return `https://wa.me/${WHATSAPP_PANCRACIO}?text=${encodeURIComponent(
-    mensajeWhatsappCompra(producto, cantidad)
-  )}`;
+export function whatsappUrlProducto(producto: Producto): string {
+  const mensaje = `Hola! Quiero pedir ${producto.nombre} (${formatearPrecio(producto.precio)}). ¿Me ayudas con mi pedido?`;
+  return `https://wa.me/${WHATSAPP_PANCRACIO}?text=${encodeURIComponent(mensaje)}`;
 }
 
 export const WHATSAPP_URL_GENERAL = `https://wa.me/${WHATSAPP_PANCRACIO}?text=${encodeURIComponent(
